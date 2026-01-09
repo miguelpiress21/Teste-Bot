@@ -4,11 +4,8 @@ from telegram.ext import MessageHandler, filters
 from bot_base import BotTelegram
 
 class BotAudio(BotTelegram):
-    """
-    Classe responsável por processar áudios (speech-to-text)
-    """
-    def __init__(self, token: str):
-        super().__init__(token)
+    def __init__(self, token):
+        super().__init__(token
         self.recognizer = sr.Recognizer()
 
         self.app.add_handler(
@@ -36,5 +33,6 @@ class BotAudio(BotTelegram):
             await update.message.reply_text(
                 "❌ Não foi possível reconhecer o áudio."
             )
+
 
         os.remove(caminho)

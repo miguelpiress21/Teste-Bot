@@ -6,10 +6,7 @@ from bot_base import BotTelegram
 from io import BytesIO
 
 class BotImagem(BotTelegram):
-    """
-    Classe responsável por processar imagens usando YOLO
-    """
-    def __init__(self, token: str):
+    def __init__(self, token):
         super().__init__(token)
         self.model = YOLO("yolov8n.pt")
 
@@ -57,4 +54,5 @@ class BotImagem(BotTelegram):
             chat_id=update.effective_chat.id,
             photo=img_io
         )
+
 

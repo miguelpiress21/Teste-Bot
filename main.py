@@ -7,4 +7,5 @@ if not TOKEN:
     raise ValueError("BOT_TOKEN não encontrado nas variáveis de ambiente")
 
 bot = BotMultimodal(TOKEN)
-bot.iniciar()
+bot.run()
+

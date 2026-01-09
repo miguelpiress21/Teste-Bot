@@ -5,7 +5,7 @@ from bot_base import BotTelegram
 
 class BotAudio(BotTelegram):
     def __init__(self, token):
-        super().__init__(token
+        super().__init__(token)
         self.recognizer = sr.Recognizer()
 
         self.app.add_handler(
@@ -36,3 +36,4 @@ class BotAudio(BotTelegram):
 
 
         os.remove(caminho)
+

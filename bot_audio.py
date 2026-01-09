@@ -4,7 +4,6 @@ from pydub import AudioSegment
 from telegram.ext import MessageHandler, filters
 from bot_base import BotTelegram
 
-
 class BotAudio(BotTelegram):
     def __init__(self, token):
         super().__init__(token)
@@ -41,7 +40,7 @@ class BotAudio(BotTelegram):
                 "❌ Não foi possível reconhecer o áudio."
             )
 
-        # Limpeza dos arquivos temporários
         os.remove(ogg_path)
         os.remove(wav_path)
+
 

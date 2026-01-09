@@ -21,14 +21,11 @@ class BotAudio(BotTelegram):
         ogg_path = "temp_audio.ogg"
         wav_path = "temp_audio.wav"
 
-        # Baixa o áudio OGG do Telegram
         await file.download_to_drive(ogg_path)
 
-        # Converte OGG → WAV corretamente
         audio_ogg = AudioSegment.from_ogg(ogg_path)
         audio_ogg.export(wav_path, format="wav")
 
-        # Reconhecimento de fala
         with sr.AudioFile(wav_path) as source:
             audio = self.recognizer.record(source)
 
@@ -47,3 +44,4 @@ class BotAudio(BotTelegram):
         # Limpeza dos arquivos temporários
         os.remove(ogg_path)
         os.remove(wav_path)
+

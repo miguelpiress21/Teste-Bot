@@ -1,7 +1,9 @@
 import os
 import speech_recognition as sr
+from pydub import AudioSegment
 from telegram.ext import MessageHandler, filters
 from bot_base import BotTelegram
+
 
 class BotAudio(BotTelegram):
     def __init__(self, token):
@@ -15,11 +17,19 @@ class BotAudio(BotTelegram):
     async def processar_audio(self, update, context):
         voice = update.message.voice
         file = await voice.get_file()
-        caminho = "temp_audio.wav"
 
-        await file.download_to_drive(caminho)
+        ogg_path = "temp_audio.ogg"
+        wav_path = "temp_audio.wav"
 
-        with sr.AudioFile(caminho) as source:
+        # Baixa o áudio OGG do Telegram
+        await file.download_to_drive(ogg_path)
+
+        # Converte OGG → WAV corretamente
+        audio_ogg = AudioSegment.from_ogg(ogg_path)
+        audio_ogg.export(wav_path, format="wav")
+
+        # Reconhecimento de fala
+        with sr.AudioFile(wav_path) as source:
             audio = self.recognizer.record(source)
 
         try:
@@ -34,6 +44,6 @@ class BotAudio(BotTelegram):
                 "❌ Não foi possível reconhecer o áudio."
             )
 
-
-        os.remove(caminho)
-
+        # Limpeza dos arquivos temporários
+        os.remove(ogg_path)
+        os.remove(wav_path)

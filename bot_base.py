@@ -1,9 +1,7 @@
 from telegram.ext import ApplicationBuilder, CommandHandler
 
 class BotTelegram:
-    """
-    Classe base responsável pela comunicação com o Telegram
-    """
+    
     def __init__(self, token: str):
         self.__token = token
         self.app = ApplicationBuilder().token(self.__token).build()
@@ -17,4 +15,5 @@ class BotTelegram:
         )
 
     def run(self):
+
         self.app.run_polling()
